@@ -7,7 +7,7 @@ app.use(express.static("public"));
 
 // JSON middleware for POST requests
 app.use(express.json());
-app.get("/", (req, res) => {
+app.get("/hello", (req, res) => {
   res.send("Hello from nodejs");
 });
 // POST route example
