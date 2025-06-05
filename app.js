@@ -1,17 +1,19 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 const PORT = 3000;
 
 // Serve static files from "public" folder
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 // JSON middleware for POST requests
 app.use(express.json());
-
+app.get("/", (req, res) => {
+  res.send("Hello from nodejs");
+});
 // POST route example
-app.post('/data', (req, res) => {
+app.post("/data", (req, res) => {
   const receivedData = req.body;
-  res.send({ message: 'Data received!', data: receivedData });
+  res.send({ message: "Data received!", data: receivedData });
 });
 
 // Start the server
