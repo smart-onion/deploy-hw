@@ -20,7 +20,7 @@ app.use(express.static("public"));
 // GET: fetch data
 app.get("/api/data", async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM test_table"); // change table name accordingly
+    const result = await pool.query("SELECT * FROM deploy"); // change table name accordingly
     res.json(result.rows);
   } catch (err) {
     console.error(err);
@@ -30,9 +30,13 @@ app.get("/api/data", async (req, res) => {
 
 // POST: insert data
 app.post("/api/data", async (req, res) => {
-  const { name } = req.body;
+  const name = req.body.name;
+  const id = req.body.id;
   try {
-    await pool.query("INSERT INTO test_table (name) VALUES ($1)", [name]);
+    await pool.query("INSERT INTO deploy (id, name) VALUES ($1, $2)", [
+      id,
+      name,
+    ]);
     res.json({ message: "Data inserted" });
   } catch (err) {
     console.error(err);

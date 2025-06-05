@@ -8,6 +8,7 @@
     <h1>PostgreSQL + Express</h1>
 
     <h2>Submit Name</h2>
+    <input type="number" id="id" placeholder="Enter id" />
     <input type="text" id="nameInput" placeholder="Enter name" />
     <button onclick="submitName()">Submit</button>
 
@@ -17,11 +18,12 @@
 
     <script>
       async function submitName() {
+        const id = document.getElementById("id").value;
         const name = document.getElementById("nameInput").value;
         const res = await fetch("/api/data", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name }),
+          body: JSON.stringify({ name: name, id: id }),
         });
         const msg = await res.json();
         alert(msg.message);
